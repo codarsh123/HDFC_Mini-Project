@@ -1,0 +1,73 @@
+
+
+
+CREATE SCHEMA `library_management_system_db` ;
+CREATE DATABASE library_management_system_db;
+
+User Table:
+CREATE TABLE `library_management_system_db`.`user` (
+  `user_id` INT NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `account_status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+
+Book table:
+CREATE TABLE `library_management_system_db`.`book` (
+  `book_id` INT NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
+  `subject` VARCHAR(45) NOT NULL,
+  `isbn` VARCHAR(45) NOT NULL,
+  `publisher` VARCHAR(50) NOT NULL,
+  `publication_date` DATE NOT NULL,
+   quantity INT(11) NOT NULL DEFAULT 0,
+  available_quantity INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`book_id`),
+  UNIQUE INDEX `isbn_UNIQUE` (`isbn` ASC) VISIBLE);
+
+Borrowing Table:
+CREATE TABLE `library_management_system_db`.`borrowing` (
+  `borrowing_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  `borrow_date` DATE NOT NULL,
+  `due_date` DATE NOT NULL,
+  `return_date` DATE NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`borrowing_id`));
+
+
+Reservation Table:
+CREATE TABLE `library_management_system_db`.`reservation` (
+  `reservation_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  `reservation_date` DATE NOT NULL,
+  PRIMARY KEY (`reservation_id`));
+
+Loan Management Table:
+CREATE TABLE `library_management_system_db`.`loan_management` (
+  `loan_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  `due_date` DATE NOT NULL,
+  `fine` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`loan_id`));
+
+Reports Table:
+CREATE TABLE `library_management_system_db`.`reports` (
+  `report_id` INT NOT NULL,
+  `user_activity` VARCHAR(45) NOT NULL,
+  `book_status` VARCHAR(45) NOT NULL,
+  `fines_collected` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`report_id`));
+
+ALTER TABLE table_name AUTO_INCREMENT = 1;
+
+
+
+
